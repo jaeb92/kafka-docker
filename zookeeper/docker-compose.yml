@@ -1,0 +1,49 @@
+version: '3.8'
+volumes:
+  zookeeper-volume-1:
+    name: pipeline-zookeeper-a-volume
+  zookeeper-volume-2:
+    name: pipeline-zookeeper-b-volume
+  zookeeper-volume-3:
+    name: pipeline-zookeeper-c-volume
+        
+services:
+  zookeeper-1:
+    image: zookeeper:0.0.1
+    container_name: zookeeper-1
+    ports:
+      - 2181:2181
+    restart: always
+    hostname: zookeeper-1
+    environment:
+      MY_ID: 1
+    volumes:
+      - zookeeper-volume-1:/data
+
+  zookeeper-2:
+    image: zookeeper:0.0.1
+    ports:
+      - 2182:2181
+    container_name: zookeeper-2
+    restart: always
+    hostname: zookeeper-2
+    environment:
+      MY_ID: 2
+    volumes:
+      - zookeeper-volume-2:/data
+
+  zookeeper-3:
+    image: zookeeper:0.0.1
+    container_name: zookeeper-3
+    ports:
+      - 2183:2181
+    restart: always
+    hostname: zookeeper-3
+    environment:
+      MY_ID: 3
+    volumes:
+      - zookeeper-volume-3:/data
+
+networks:
+  default:
+      name: zoo

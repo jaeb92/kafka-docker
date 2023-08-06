@@ -1,0 +1,85 @@
+version: '3.8'
+volumes:
+  kafka-volume-1:
+    name: kafka-volume-1
+  kafka-volume-2:
+    name: kafka-volume-2
+  kafka-volume-3:
+    name: kafka-volume-3
+  kafka-volume-4:
+    name: kafka-volume-4
+  kafka-volume-5:
+    name: kafka-volume-5
+
+services:
+  kafka-client:
+    container_name: kakfa-client
+    hostname: kafka-client
+    image: kafka:0.0.1
+    restart: always
+    volumes: 
+      - /Users/jaeb/news/kafka-client:/kafka-client
+
+  kafka-1:
+    container_name: kafka-1
+    environment:
+      BROKER_ID: 1
+    hostname: kafka-1
+    image: kafka:0.0.1
+    ports: 
+      - 9092:9092
+    restart: always
+    volumes:
+      - kafka-volume-1:/data
+
+  kafka-2:
+    container_name: kafka-2
+    environment:
+      BROKER_ID: 2
+    hostname: kafka-2
+    ports: 
+      - 9093:9092
+    image: kafka:0.0.1
+    restart: always
+    volumes:
+      - kafka-volume-2:/data
+
+  kafka-3:
+    container_name: kafka-3
+    environment:
+      BROKER_ID: 3
+    hostname: kafka-3
+    ports: 
+      - 9094:9092
+    image: kafka:0.0.1
+    restart: always
+    volumes:
+      - kafka-volume-3:/data
+
+  kafka-4:
+    container_name: kafka-4
+    environment:
+      BROKER_ID: 4
+    hostname: kafka-4
+    ports: 
+      - 9095:9092
+    image: kafka:0.0.1
+    restart: always
+    volumes:
+      - kafka-volume-4:/data
+
+  kafka-5:
+    container_name: kafka-5
+    environment:
+      BROKER_ID: 5
+    hostname: kafka-5
+    ports: 
+      - 9096:9092
+    image: kafka:0.0.1
+    restart: always
+    volumes:
+      - kafka-volume-5:/data
+
+networks:
+  default:
+      name: zoo
